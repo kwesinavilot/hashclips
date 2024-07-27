@@ -4,16 +4,16 @@ export default function Footer() {
     return (
         <footer className="flex h-14 bottom-0 bg-background px-4 justify-between items-center justify-between md:h-24 md:flex-row">
             <div className="mr-4 hidden md:flex items-center">
-                <p class="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
-                    Built by <a href="https://kwesinavilot.github.io/me/" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4 hover:text-blue-600">Andrews Kwesi Ankomahene</a>.
-                    The source code is available on <a href="https://github.com/kwesinavilot/hashclips" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4 hover:text-blue-600">GitHub</a>.
+                <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+                    Built by <a href="https://kwesinavilot.github.io/me/" target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4 hover:text-blue-600">Andrews Kwesi Ankomahene</a>.
+                    The source code is available on <a href="https://github.com/kwesinavilot/hashclips" target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4 hover:text-blue-600">GitHub</a>.
                 </p>
             </div>
 
             <nav className="flex items-center gap-2">
                 <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/andrews-kwesi-ankomahene/">
                     <div className="font-semibold text-sm border border-transparent hover:border hover:border-slate-200 inline-flex justify-center items-center gap-2 dark:hover:border-slate-800 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 focus:dark:ring-offset-slate-800 text-slate-600 dark:text-slate-300 rounded-full p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
 
                         <span className="sr-only">LinkedIn</span>
                     </div>

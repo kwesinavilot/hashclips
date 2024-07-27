@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       <Heading />
 
-      <main className="main">
+      <main className="flex-">
         <Hero />
       </main>
       
