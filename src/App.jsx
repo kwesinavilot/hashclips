@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './styles/index.css';
 import Heading from "@/components/site/Heading";
 import Footer from './components/site/Footer';
+import Hero from './components/site/Hero';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Heading />
 
       <main className="main">
-        <p>Hello World</p>
+        <Hero />
       </main>
       
       <Footer />
