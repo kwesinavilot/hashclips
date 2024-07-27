@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import './styles/index.css';
 import Heading from "@/components/site/Heading";
+import Footer from './components/site/Footer';
 
 function App() {
   return (
     <div className="app">
       <Heading />
 
-      {/* <main className="app-main">
+      <main className="main">
         <p>Hello World</p>
       </main>
-
-      <footer className="app-footer">
-        <p>&copy; 2024 HashClips. All rights reserved.</p>
-      </footer> */}
+      
+      <Footer />
     </div>
   );
 }
