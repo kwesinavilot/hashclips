@@ -26,7 +26,7 @@ export default function Hero() {
                 </h3>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center text-center text-base text-xl font-normal leading-8">
+            <div className="flex flex-wrap items-center justify-center text-center text-base text-xl text-slate-600 font-normal leading-8">
                 <span className="px-28">Drop a link to your Hashnode post, and let Hashclips create a compelling video for you using the power of AI!</span>
             </div>
 
