@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { LoaderCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge"
 
 export default function Generator() {
     const [blogLink, setBlogLink] = useState("");
@@ -38,7 +39,7 @@ export default function Generator() {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Something went wrong: ${response.status}`);
             }
 
             const data = await response.json();
@@ -60,6 +61,20 @@ export default function Generator() {
             setScript("This is a simulated GPT-4 generated script based on the blog content.");
             setScriptLoading(false);
         }, 3000); // 3 seconds delay to simulate API call
+    };
+
+    const getTagColor = (index) => {
+        const colors = [
+            "bg-blue-100 text-blue-800",
+            "bg-green-100 text-green-800",
+            "bg-yellow-100 text-yellow-800",
+            "bg-purple-100 text-purple-800",
+            "bg-pink-100 text-pink-800",
+            "bg-indigo-100 text-indigo-800",
+            "bg-red-100 text-red-800",
+            "bg-teal-100 text-teal-800"
+        ];
+        return colors[index % colors.length];
     };
 
     return (
@@ -100,10 +115,12 @@ export default function Generator() {
 
             <section className="grid grid-cols-2 gap-8 text-black">
                 <div className="rounded-xl border bg-white shadow overflow-hidden">
-                    <div className="space-y-1.5 p-6 bg-muted/50">
-                        <h2 className="text-2xl font-bold mb-4">Blog Details</h2>
+                    <div className="space-y-1.5 p-6">
+                        <h3 className="font-bold tracking-tight items-center text-lg">Blog Post Details</h3>
+                        <p class="text-sm font-medium text-gray-500">Important information about the blog post.</p>
                     </div>
-                    <div className="p-6 text-sm">
+
+                    <div className="px-6 pb-6 text-sm">
                         {loading ? (
                             <div className="animate-pulse space-y-4">
                                 <div className="h-4 bg-gray-200 rounded w-3/4"></div>
@@ -113,40 +130,63 @@ export default function Generator() {
                             </div>
                         ) : blogDetails ? (
                             <>
-                                <h3 className="text-xl font-semibold">{blogDetails.title}</h3>
-                                <p className="text-gray-600 mt-2">Author: {blogDetails.author}</p>
-                                <p className="mt-4">{blogDetails.brief}</p>
-                                <div className="mt-4">
-                                    <h4 className="text-lg font-semibold">Tags:</h4>
-                                    <ul className="list-disc list-inside">
+                                <div class="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <p class="text-sm font-semibold">Post Title</p>
+                                    <h3 class="font-medium text-gray-500">
+                                        {blogDetails.title}
+                                    </h3>
+                                </div>
+
+                                <div class="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <p class="text-sm font-semibold">Author</p>
+                                    <h3 class="font-medium text-gray-500">
+                                        {blogDetails.author}
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-2 mb-6">
+                                    <p className="text-sm font-semibold">Tags</p>
+                                    <div className="flex flex-wrap gap-2">
                                         {blogDetails.tags.map((tag, index) => (
-                                            <li key={index}>{tag}</li>
+                                            <Badge
+                                                key={index}
+                                                variant="secondary"
+                                                className={`${getTagColor(index)} hover:opacity-80`}
+                                            >
+                                                {tag}
+                                            </Badge>
                                         ))}
-                                    </ul>
+                                    </div>
                                 </div>
-                                <div className="mt-4">
-                                    <h4 className="text-lg font-semibold">Content Preview:</h4>
-                                    <p>{blogDetails.content.substring(0, 200)}...</p>
+
+                                <div class="grid flex-1 auto-rows-min gap-1">
+                                    <p class="text-sm font-semibold">Post Preview</p>
+                                    <h4 class="font-medium text-gray-500">
+                                        {/* {blogDetails.brief} */}
+                                        {blogDetails.content.substring(0, 500)}...
+                                    </h4>
                                 </div>
-                                <div className="p-6 flex flex-row items-center border-t bg-muted/50 mt-4">
-                                    <div className="text-xs text-muted-foreground">
+
+                                <div className="px-0 py-4 flex flex-row items-center border-t-2 mt-4">
+                                    <div className="text-sm font-semibold text-gray-500">
                                         Retrieved on <time dateTime={new Date().toISOString()}>{new Date().toLocaleDateString()}</time>
                                     </div>
                                 </div>
                             </>
                         ) : (
-                            <p>No blog content available. Enter a blog link and click "Create Video" to fetch content.</p>
+                            <p className="text-center font-semibold">No blog content available. Enter a blog link and click "Create Video" to fetch content.</p>
                         )}
                     </div>
                 </div>
 
                 <div className="rounded-xl border bg-white shadow overflow-hidden">
                     <div className="space-y-1.5 p-6 bg-muted/50">
-                        <h2 className="text-2xl font-bold mb-4">Generated Script</h2>
+                        <h3 className="font-bold tracking-tight items-center text-lg">Video Script</h3>
+                        <p class="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
                     </div>
-                    <div className="p-6 text-sm">
+                    <div className="px-6 pb-6 text-sm">
                         {!blogDetails ? (
-                            <p>Waiting for blog content...</p>
+                            <p className="text-center font-semibold">Waiting for blog content...</p>
                         ) : scriptLoading ? (
                             <div className="animate-pulse space-y-4">
                                 <div className="h-4 bg-gray-200 rounded w-3/4"></div>
@@ -157,7 +197,7 @@ export default function Generator() {
                         ) : script ? (
                             <div>{script}</div>
                         ) : (
-                            <p>Preparing to generate script...</p>
+                            <p className="text-center font-semibold">Preparing to generate script...</p>
                         )}
                     </div>
                 </div>
