@@ -1,28 +1,39 @@
 class PostExtractor {
   constructor() {
-    this.apiUrl = 'https://api.hashnode.com/';
+    this.apiUrl = 'https://gql.hashnode.com'; // Updated API endpoint
   }
 
   async sendQuery(query, variables = {}) {
-    const response = await fetch(this.apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query, variables }),
-    });
+    // console.log('Sending query:', query);
+    // console.log('Variables:', variables);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    try {
+      const response = await fetch(this.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, variables }),
+      });
+
+      const data = await response.json();
+
+      if (data.errors) {
+        console.error('GraphQL Errors:', data.errors);
+        const errorCode = data.errors[0]?.extensions?.code || 'UNKNOWN_ERROR';
+        const errorMessage = data.errors[0]?.message || 'An unknown error occurred';
+        throw new Error(`GraphQL Error: ${errorCode} - ${errorMessage}`);
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return data.data;
+    } catch (error) {
+      console.error('Error in sendQuery:', error);
+      throw error;
     }
-
-    const data = await response.json();
-    
-    if (data.errors) {
-      throw new Error(`GraphQL Error: ${JSON.stringify(data.errors)}`);
-    }
-
-    return data.data;
   }
 
   async getPostBySlug(host, slug) {
@@ -49,6 +60,33 @@ class PostExtractor {
     `;
 
     const variables = { host, slug };
+    return this.sendQuery(query, variables);
+  }
+
+  async getPublicationInfo(host) {
+    const query = `
+      query Publication($host: String!) {
+        publication(host: $host) {
+          id
+          title
+          displayTitle
+          descriptionSEO
+          about {
+            markdown
+          }
+          isTeam
+          followersCount
+          url
+          canonicalURL
+          preferences {
+            layout
+            theme
+          }
+        }
+      }
+    `;
+
+    const variables = { host };
     return this.sendQuery(query, variables);
   }
 }
