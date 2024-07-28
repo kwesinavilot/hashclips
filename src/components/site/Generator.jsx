@@ -12,17 +12,32 @@ export default function Generator() {
 
     const handleCreateVideo = async () => {
         if (!blogLink) {
-            setError("You entered nothing. Are you sure you wonna generate the video?");
+            setError("You entered nothing. Are you sure you want to generate the video?");
             return;
         }
         setError(""); // Clear error if there is any input
         setLoading(true);
-        // Simulate the process of fetching and processing the blog post
+
         try {
             console.log("Fetching blog post:", blogLink);
-            // Add your scraping and video creation logic here
+
+            const response = await fetch("/api/bridge/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ blogLink: blogLink })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
         } catch (error) {
             console.error("Error creating video:", error);
+            setError("Failed to process blog post. Please try again.");
         } finally {
             setLoading(false);
         }
