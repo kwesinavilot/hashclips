@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <footer className="flex h-14 bottom-0 bg-background px-4 justify-between items-center justify-between md:h-24 md:flex-row">
             <div className="mr-4 hidden md:flex items-center">
-                <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+                <p className="text-balance text-center text-black text-sm leading-loose text-muted-foreground md:text-left">
                     Built by <a href="https://kwesinavilot.github.io/me/" target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4 hover:text-blue-600">Andrews Kwesi Ankomahene</a>.
                     The source code is available on <a href="https://github.com/kwesinavilot/hashclips" target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4 hover:text-blue-600">GitHub</a>.
                 </p>
