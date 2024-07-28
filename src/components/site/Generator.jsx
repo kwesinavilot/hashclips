@@ -19,7 +19,7 @@ export default function Generator() {
         setLoading(true);
 
         try {
-            console.log("Fetching blog post:", blogLink);
+            // console.log("Fetching blog post:", blogLink);
 
             const response = await fetch("/api/bridge/", {
                 method: "POST",
@@ -34,7 +34,7 @@ export default function Generator() {
             }
 
             const data = await response.json();
-            console.log(data);
+            console.log("Blog post data:", data);
         } catch (error) {
             console.error("Error creating video:", error);
             setError("Failed to process blog post. Please try again.");

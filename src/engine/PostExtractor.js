@@ -46,7 +46,9 @@ class PostExtractor {
             content {
               markdown
             }
-            coverImage
+            coverImage {
+              url
+            }
             author {
               name
               username
