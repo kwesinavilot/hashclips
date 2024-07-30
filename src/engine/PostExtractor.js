@@ -51,11 +51,23 @@ class PostExtractor {
             }
             author {
               name
-              username
+            }
+            coAuthors {
+              name
             }
             tags {
               name
             }
+            readTimeInMinutes
+            views
+            reactionCount
+            publication {
+              displayTitle
+            }
+            responseCount
+            replyCount
+            publishedAt
+            updatedAt
           }
         }
       }

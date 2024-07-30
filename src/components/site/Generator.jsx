@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { LoaderCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"
+import { AlarmClock, MessageSquareMore, MessageSquareReply, Eye, Heart, UserPen, Users } from 'lucide-react';
 
 export default function Generator() {
     const [blogLink, setBlogLink] = useState("");
@@ -117,7 +118,7 @@ export default function Generator() {
                 <div className="rounded-xl border bg-white shadow overflow-hidden">
                     <div className="space-y-1.5 p-6">
                         <h3 className="font-bold tracking-tight items-center text-lg">Blog Post Details</h3>
-                        <p class="text-sm font-medium text-gray-500">Important information about the blog post.</p>
+                        <p className="text-sm font-medium text-gray-500">Important information about the blog post.</p>
                     </div>
 
                     <div className="px-6 pb-6 text-sm">
@@ -130,17 +131,91 @@ export default function Generator() {
                             </div>
                         ) : blogDetails ? (
                             <>
-                                <div class="grid flex-1 auto-rows-min gap-1 mb-6">
-                                    <p class="text-sm font-semibold">Post Title</p>
-                                    <h3 class="font-medium text-gray-500">
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <p className="text-sm font-semibold">Post Title</p>
+                                    <h3 className="font-medium text-gray-500">
                                         {blogDetails.title}
                                     </h3>
                                 </div>
 
-                                <div class="grid flex-1 auto-rows-min gap-1 mb-6">
-                                    <p class="text-sm font-semibold">Author</p>
-                                    <h3 class="font-medium text-gray-500">
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <UserPen className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Author</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
                                         {blogDetails.author}
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <Users className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Co-Author(s)</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
+                                        {
+                                            blogDetails.coAuthors.map(
+                                                (coAuthor) => coAuthor
+                                            ).join(", ")
+                                        }
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <AlarmClock className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Reading Time</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
+                                        {blogDetails.readTime} minutes
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <Eye className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Views</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
+                                        {blogDetails.views} views
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <Heart className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Reactions</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
+                                        {blogDetails.reactionCount} hearts
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <MessageSquareMore className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Comments</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
+                                        {blogDetails.responseCount} comments
+                                    </h3>
+                                </div>
+
+                                <div className="grid flex-1 auto-rows-min gap-1 mb-6">
+                                    <div className="flex items-center gap-1">
+                                        <MessageSquareReply className="h-5 w-5 text-sm font-semibold" />
+                                        <p className="text-sm font-semibold">Replies</p>
+                                    </div>
+
+                                    <h3 className="font-medium text-gray-500">
+                                        {blogDetails.replyCount} replies
                                     </h3>
                                 </div>
 
@@ -159,18 +234,17 @@ export default function Generator() {
                                     </div>
                                 </div>
 
-                                <div class="grid flex-1 auto-rows-min gap-1">
-                                    <p class="text-sm font-semibold">Post Preview</p>
-                                    <h4 class="font-medium text-gray-500">
-                                        {/* {blogDetails.brief} */}
+                                <div className="grid flex-1 auto-rows-min gap-1">
+                                    <p className="text-sm font-semibold">Post Preview</p>
+                                    <h4 className="font-medium text-gray-500">
                                         {blogDetails.content.substring(0, 500)}...
                                     </h4>
                                 </div>
 
-                                <div className="px-0 py-4 flex flex-row items-center border-t-2 mt-4">
-                                    <div className="text-sm font-semibold text-gray-500">
-                                        Retrieved on <time dateTime={new Date().toISOString()}>{new Date().toLocaleDateString()}</time>
-                                    </div>
+                                <div className="px-0 py-4 items-center border-t-2 mt-4 flex text-sm font-semibold text-gray-500 justify-between">
+                                    <div>Published: {new Date(blogDetails.publishedAt).toLocaleDateString('en-GB')}</div>
+                                    
+                                    <div>Updated: {new Date(blogDetails.updatedAt).toLocaleDateString('en-GB')}</div>
                                 </div>
                             </>
                         ) : (
@@ -182,7 +256,7 @@ export default function Generator() {
                 <div className="rounded-xl border bg-white shadow overflow-hidden">
                     <div className="space-y-1.5 p-6 bg-muted/50">
                         <h3 className="font-bold tracking-tight items-center text-lg">Video Script</h3>
-                        <p class="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
+                        <p className="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
                     </div>
                     <div className="px-6 pb-6 text-sm">
                         {!blogDetails ? (

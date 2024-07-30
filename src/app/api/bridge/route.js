@@ -18,7 +18,7 @@ export async function POST(request) {
 
         // Fetch the blog post
         const postData = await extractor.getPostBySlug(host, slug);
-        console.log('Received post data: ', postData);
+        // console.log('Received post data: ', postData);
 
         if (!postData || !postData.publication || !postData.publication.post) {
             return NextResponse.json({ error: 'Blog post not found' }, { status: 404 });
@@ -33,7 +33,16 @@ export async function POST(request) {
             content: post.content.markdown,
             author: post.author.name,
             tags: post.tags.map(tag => tag.name),
-            coverImage: post.coverImage
+            coverImage: post.coverImage,
+            readTime: post.readTimeInMinutes,
+            views: post.views,
+            reactionCount: post.reactionCount,
+            responseCount: post.responseCount,
+            replyCount: post.replyCount,
+            publication: post.publication.displayTitle,
+            coAuthors: post.coAuthors.map(coAuthor => coAuthor.name),
+            publishedAt: post.publishedAt,
+            updatedAt: post.updatedAt
         };
         
         return NextResponse.json({
