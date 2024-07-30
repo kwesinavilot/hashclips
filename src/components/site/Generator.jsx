@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { LoaderCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
+
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { AlarmClock, MessageSquareMore, MessageSquareReply, Eye, Heart, UserPen, Users } from 'lucide-react';
 
 export default function Generator() {
@@ -131,6 +134,16 @@ export default function Generator() {
                             </div>
                         ) : blogDetails ? (
                             <>
+                                <div className="w-full mb-6">
+                                    <Image
+                                        src={blogDetails.coverImage}
+                                        width={350}
+                                        height={350}
+                                        alt="Cover Image"
+                                        className="rounded-md object-cover"
+                                    />
+                                </div>
+
                                 <div className="grid flex-1 auto-rows-min gap-1 mb-6">
                                     <p className="text-sm font-semibold">Post Title</p>
                                     <h3 className="font-medium text-gray-500">
@@ -243,7 +256,7 @@ export default function Generator() {
 
                                 <div className="px-0 py-4 items-center border-t-2 mt-4 flex text-sm font-semibold text-gray-500 justify-between">
                                     <div>Published: {new Date(blogDetails.publishedAt).toLocaleDateString('en-GB')}</div>
-                                    
+
                                     <div>Updated: {new Date(blogDetails.updatedAt).toLocaleDateString('en-GB')}</div>
                                 </div>
                             </>

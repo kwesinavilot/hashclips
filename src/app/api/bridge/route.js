@@ -33,7 +33,7 @@ export async function POST(request) {
             content: post.content.markdown,
             author: post.author.name,
             tags: post.tags.map(tag => tag.name),
-            coverImage: post.coverImage,
+            coverImage: post.coverImage.url,
             readTime: post.readTimeInMinutes,
             views: post.views,
             reactionCount: post.reactionCount,
