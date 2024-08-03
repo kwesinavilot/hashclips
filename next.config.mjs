@@ -1,7 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // Override the default webpack configuration
+    webpack: (config, { isServer }) => {
+        if (!isServer) {
+            config.resolve.fallback = {
+                ...config.resolve.fallback,
+                sharp$: false,
+                fs: false,
+                path: false,
+                child_process: false,
+                // onnxruntime: false,
+                "onnxruntime-node$": false,
+            };
+        }
+
+        config.externals.push({
+           'onnxruntime-node': 'commonjs onnxruntime-node',
+        }); 
+
+        return config;
+    },
+
     images: {
-        domains: ['cdn.hashnode.com', 'localhost', '127.0.0.1', 'hashclips.vercel.app', 'cdn.hashnode.com'],
         remotePatterns: [
             {
                 protocol: 'http',
