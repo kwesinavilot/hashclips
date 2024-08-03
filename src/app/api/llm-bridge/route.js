@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generateScriptFromContent } from "../../../engine/ScriptGenerator";
+import { generateScriptFromContent, azureOpenAIDirectGenerator } from "../../../engine/ScriptGenerator";
 
 export async function POST(request) {
     try {
@@ -9,7 +9,8 @@ export async function POST(request) {
             return NextResponse.json({ error: 'The content of a Hashnode blog is required' }, { status: 400 });
         }
 
-        const script = await generateScriptFromContent(blogContent);
+        // const script = await generateScriptFromContent(blogContent);
+        const script = await azureOpenAIDirectGenerator(blogContent);
         
         return NextResponse.json({
             message: 'Script generated successfully',
