@@ -1,5 +1,5 @@
 import { Document, VectorStoreIndex, OpenAI, Settings } from "llamaindex";
-import { OpenAIClient, AzureKeyCredential } from "@azure/openai";
+import { AzureOpenAI } from "openai";
 
 function cleanBlogContent(content) {
     // Replace backticks with single quotes
@@ -135,30 +135,30 @@ export async function azureOpenAIDirectGenerator(blogContent) {
 
     console.log("Sanitizing blog content");
     const cleanedContent = cleanBlogContent(blogContent);
-    console.log("Cleaned blog content:", cleanedContent);
+    // console.log("Cleaned blog content:", cleanedContent);
 
     try {
         console.log("Preparing prompt for Azure OpenAI");
         const prompt = customScriptPrompt(cleanedContent);
 
         // Configure Azure OpenAI client
-        const client = new OpenAIClient(
-            process.env.AZURE_OPENAI_ENDPOINT,
-            new AzureKeyCredential(process.env.AZURE_OPENAI_KEY)
-        );
+        const client = new AzureOpenAI({
+            endpoint: process.env.AZURE_OPENAI_ENDPOINT,
+            apiKey: process.env.AZURE_OPENAI_KEY,
+            apiVersion: process.env.AZURE_OPENAI_VERSION,
+            deploymentName: process.env.AZURE_OPENAI_DEPLOYMENT,
+        });
 
         console.log("Sending request to Azure OpenAI");
-        const { choices } = await client.getCompletions(
-            process.env.AZURE_OPENAI_DEPLOYMENT,
-            [prompt],
-            {
-                temperature: 0.3,
-                max_tokens: 1000,
-            }
-        );
+        const { choices } = await client.completions.create({
+            prompt: prompt,
+            temperature: 0.2,
+            model: process.env.AZURE_OPENAI_MODEL,
+        })
 
         const generatedScript = choices[0].text;
-        console.log("Generated script:", generatedScript);
+        // console.log("Generated script:", generatedScript);
+
         return generatedScript;
     } catch (error) {
         console.error("Error generating script from Azure OpenAI:", error);
