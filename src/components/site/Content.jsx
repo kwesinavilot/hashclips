@@ -281,26 +281,77 @@ export default function Generator() {
                     </div>
                 </div>
 
-                <div className="rounded-xl border bg-white shadow overflow-hidden">
-                    <div className="space-y-1.5 p-6 bg-muted/50">
-                        <h3 className="font-bold tracking-tight items-center text-lg">Video Script</h3>
-                        <p className="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
+                <div className="w-full space-y-8">
+                    <div className="p-6 rounded-xl border bg-white shadow overflow-hidden">
+                        <div className="space-y-1.5 bg-muted/50">
+                            <h3 className="font-bold tracking-tight items-center text-lg">Video Clip</h3>
+                            <p className="text-sm font-medium text-gray-500">This is the video clip created from the blog content.</p>
+                        </div>
+
+                        <div className="text-sm">
+                            {!blogDetails ? (
+                                <p className="text-center font-semibold">Waiting for blog content...</p>
+                            ) : videoLoading ? (
+                                <div className="animate-pulse space-y-4">
+                                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                </div>
+                            ) : video ? (
+                                <div>{video}</div>
+                            ) : (
+                                <p className="text-center font-semibold">No blog content available. Enter a blog link and click "Create Video" to fetch content.</p>
+                            )}
+                        </div>
                     </div>
-                    <div className="px-6 pb-6 text-sm">
-                        {!blogDetails ? (
-                            <p className="text-center font-semibold">Waiting for blog content...</p>
-                        ) : scriptLoading ? (
-                            <div className="animate-pulse space-y-4">
-                                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                                <div className="h-4 bg-gray-200 rounded"></div>
-                                <div className="h-4 bg-gray-200 rounded"></div>
-                                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                            </div>
-                        ) : script ? (
-                            <div>{script}</div>
-                        ) : (
-                            <p className="text-center font-semibold">Preparing to generate script...</p>
-                        )}
+
+                    <div className="p-6 rounded-xl border bg-white shadow overflow-hidden">
+                        <div className="space-y-1.5 bg-muted/50">
+                            <h3 className="font-bold tracking-tight items-center text-lg">Audio</h3>
+                            <p className="text-sm font-medium text-gray-500">This is an Eleven Labs voice over audio created for the video clip.</p>
+                        </div>
+
+                        <div className="text-sm">
+                            {!blogDetails ? (
+                                <p className="text-center font-semibold">Waiting for video script...</p>
+                            ) : audioLoading ? (
+                                <div className="animate-pulse space-y-4">
+                                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                </div>
+                            ) : audio ? (
+                                <div>{audio}</div>
+                            ) : (
+                                <p className="text-center font-semibold">No blog content available. Enter a blog link and click "Create Video" to fetch content.</p>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="p-6 rounded-xl border bg-white shadow overflow-hidden">
+                        <div className="space-y-1.5 bg-muted/50">
+                            <h3 className="font-bold tracking-tight items-center text-lg">Video Script</h3>
+                            <p className="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
+                        </div>
+
+                        <div className="text-sm">
+                            {!blogDetails ? (
+                                <p className="text-center font-semibold">Waiting for blog content...</p>
+                            ) : scriptLoading ? (
+                                <div className="animate-pulse space-y-4">
+                                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                </div>
+                            ) : script ? (
+                                <div>{script}</div>
+                            ) : (
+                                <p className="text-center font-semibold">Preparing to generate script...</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
