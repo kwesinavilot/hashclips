@@ -5,6 +5,12 @@ import { LoaderCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 import {
     MediaController,
@@ -17,8 +23,7 @@ import {
     MediaSeekForwardButton,
     MediaMuteButton,
 } from 'media-chrome/react';
-
-import { AlarmClock, MessageSquareMore, MessageSquareReply, Eye, Heart, UserPen, Users } from 'lucide-react';
+import { AlarmClock, MessageSquareMore, MessageSquareReply, Eye, Heart, UserPen, Users, ChevronsUpDown, Plus, X } from 'lucide-react';
 
 export default function Generator() {
     const [blogLink, setBlogLink] = useState("");
@@ -361,29 +366,41 @@ export default function Generator() {
                         </div>
                     </div>
 
-                    <div className="p-6 rounded-xl border bg-white shadow overflow-hidden">
-                        <div className="space-y-1.5 bg-muted/50">
-                            <h3 className="font-bold tracking-tight items-center text-lg">Video Script</h3>
-                            <p className="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
+                    <Collapsible className="p-6 rounded-xl border bg-white shadow overflow-hidden">
+                        <div className="flex items-center justify-between space-x-4 w-full">
+                            <div className="space-y-1.5 bg-muted/50">
+                                <h3 className="font-bold tracking-tight items-center text-lg">Video Script</h3>
+                                <p className="text-sm font-medium text-gray-500">This is a GPT-4 generated script based on the blog content.</p>
+                            </div>
+
+                            <CollapsibleTrigger asChild>
+                                <Button variant="ghost" size="sm" className="w-9 p-0">
+                                    <ChevronsUpDown className="h-4 w-4" />
+                                    <span className="sr-only">Toggle</span>
+                                </Button>
+                            </CollapsibleTrigger>
                         </div>
 
-                        <div className="text-sm">
-                            {!blogDetails ? (
-                                <p className="text-center font-semibold">Waiting for blog content...</p>
-                            ) : scriptLoading ? (
-                                <div className="animate-pulse space-y-4">
-                                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                                    <div className="h-4 bg-gray-200 rounded"></div>
-                                    <div className="h-4 bg-gray-200 rounded"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                                </div>
-                            ) : script ? (
-                                <div>{script}</div>
-                            ) : (
-                                <p className="text-center font-semibold">Preparing to generate script...</p>
-                            )}
-                        </div>
-                    </div>
+                        <CollapsibleContent>
+                            <ScrollArea className="h-[200px] w-full p-4">
+                                {!blogDetails ? (
+                                    <p className="text-center font-semibold mx-auto p-auto">Waiting for blog content...</p>
+                                ) : scriptLoading ? (
+                                    <div className="animate-pulse space-y-4">
+                                        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                        <div className="h-4 bg-gray-200 rounded"></div>
+                                        <div className="h-4 bg-gray-200 rounded"></div>
+                                        <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                                    </div>
+                                ) : script ? (
+                                    <div className="whitespace-pre-wrap">{script}</div>
+                                ) : (
+                                    <p className="text-center font-semibold">Preparing to generate script...</p>
+                                )}
+                            </ScrollArea>
+                        </CollapsibleContent>
+                    </Collapsible>
+                    {/* </div> */}
                 </div>
             </section>
         </div>
