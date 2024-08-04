@@ -6,6 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 
+import {
+    MediaController,
+    MediaControlBar,
+    MediaTimeRange,
+    MediaTimeDisplay,
+    MediaVolumeRange,
+    MediaPlayButton,
+    MediaSeekBackwardButton,
+    MediaSeekForwardButton,
+    MediaMuteButton,
+} from 'media-chrome/react';
+
 import { AlarmClock, MessageSquareMore, MessageSquareReply, Eye, Heart, UserPen, Users } from 'lucide-react';
 
 export default function Generator() {
@@ -323,7 +335,26 @@ export default function Generator() {
                                     <div className="h-4 bg-gray-200 rounded w-5/6"></div>
                                 </div>
                             ) : audio ? (
-                                <div>{audio}</div>
+                                <div>
+                                    <MediaController>
+                                        <video
+                                            slot="media"
+                                            src="https://stream.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/high.mp4"
+                                            preload="auto"
+                                            muted
+                                            crossOrigin=""
+                                        />
+                                        <MediaControlBar>
+                                            <MediaPlayButton></MediaPlayButton>
+                                            <MediaSeekBackwardButton></MediaSeekBackwardButton>
+                                            <MediaSeekForwardButton></MediaSeekForwardButton>
+                                            <MediaTimeRange></MediaTimeRange>
+                                            <MediaTimeDisplay showDuration></MediaTimeDisplay>
+                                            <MediaMuteButton></MediaMuteButton>
+                                            <MediaVolumeRange></MediaVolumeRange>
+                                        </MediaControlBar>
+                                    </MediaController>
+                                </div>
                             ) : (
                                 <p className="text-center font-semibold">No blog content available. Enter a blog link and click "Create Video" to fetch content.</p>
                             )}
