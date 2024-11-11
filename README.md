@@ -51,7 +51,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or feedback, please reach out to us at [andrewsankomahene@gmail.com](mailto:andrewsankomahene@gmail.com).
+For any questions or feedback, please reach out to us at [teamserviceskeep@gmail.com](mailto:teamserviceskeep@gmail.com).
 
 ## Acknowledgments
 
